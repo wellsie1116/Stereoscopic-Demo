@@ -1,0 +1,22 @@
+#extension GL_EXT_gpu_shader4 : enable
+
+attribute vec4 gl_Color;
+
+varying vec3 position;
+
+varying vec4 gl_FrontColor;
+
+varying float fogFactor;
+
+void main()
+{
+	position = gl_Vertex.xyz;
+
+	vec3 vVertex = vec3(gl_ModelViewMatrix * gl_Vertex);
+	gl_FogFragCoord = length(vVertex);
+	fogFactor = gl_Fog.density * (gl_Fog.end - gl_FogFragCoord) / (gl_Fog.end - gl_Fog.start);
+	fogFactor = clamp(fogFactor, 0.0, 1.0);
+
+	gl_FrontColor = gl_Color;
+	gl_Position = ftransform();
+}

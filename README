@@ -1,0 +1,6 @@
+Building
+
+Targets depends on glib-2.0.  Install the libglib2.0-dev package before building.
+
+Otherwise, simply run make to build the demo.
+
